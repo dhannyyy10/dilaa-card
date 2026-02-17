@@ -105,14 +105,14 @@ button:hover { transform:translateY(-3px); box-shadow:0 12px 20px rgba(0,0,0,0.3
   <h1>pilih iya atau tidak untuk memaafkan aku🫰</h1>
   <button onclick="choose(1)">iyaaaa 🥰</button>
   <button onclick="choose(2)">tidakk 😔</button>
-  <button onclick="goBackPage1()">kembali ↩️</button>
+  <button onclick="goBackToPage1()">kembali ↩️</button>
 </div>
 
 <!-- Page 3 / Ending -->
 <div class="card page" id="page3">
   <h1>for dilaa 💐</h1>
   <p>ih ganyangka kamu bakal maafin aku<br>MAACIIII KARENA SUDAH MEMAAFKAN AKUUUU🥰🥰😉</p>
-  <button onclick="goBackPage1()">kembali ↩️</button>
+  <button onclick="showPage('page2')">kembali ↩️</button>
 </div>
 
 <script>
@@ -164,8 +164,8 @@ function choose(option){
   triggerEnding(); 
 }
 
-// kembali ke page1
-function goBackPage1(){ 
+// kembali ke page1 dari page2
+function goBackToPage1(){ 
   showPage("page1"); 
   texts.forEach(p => p.classList.remove("active")); 
   tIndex=0; 
