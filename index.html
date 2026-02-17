@@ -3,211 +3,256 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dilaa 🫰</title>
+<title>dilaa 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; margin:0; padding:0; }
-
-body {
-  font-family: 'Playfair Display', serif;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #a8dadc, #bde0fe, #caf0f8);
-  background-size: 400% 400%;
-  animation: bgAnim 20s ease infinite;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Playfair Display', serif;
+  overflow:hidden;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#a8dadc,#bde0fe,#caf0f8);
+  background-size:400% 400%;
+  animation:bgAnim 20s ease infinite;
 }
 
-@keyframes bgAnim {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-
-.card {
-  position: relative;
-  background: rgba(255,255,255,0.95);
-  padding: 30px;
-  border-radius: 25px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-  z-index: 2;
+@keyframes bgAnim{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
-h1 { color: #ff4d6d; margin-bottom: 15px; text-shadow: 1px 1px 5px rgba(0,0,0,0.2); font-weight:700; }
+.card{
+  position:relative;
+  background:rgba(255,255,255,0.95);
+  padding:30px;
+  border-radius:25px;
+  width:90%;
+  max-width:450px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,0.3);
+  z-index:2;
+  transition:all 1s ease;
+}
 
-p {
+h1{
+  color:#ff4d6d;
+  margin-bottom:15px;
+  text-shadow:1px 1px 5px rgba(0,0,0,0.2);
+  font-weight:700;
+}
+
+p{
   font-size:16px;
   line-height:1.8;
   color:#333;
   margin:12px 0;
   opacity:0;
-  transform: translateY(30px) scale(0.95);
-  filter: blur(2px);
-  text-shadow: 0 0 3px rgba(255,77,109,0.3);
-  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform:translateY(10px);
+  transition:all 0.5s ease;
 }
 
-p.active {
-  opacity:1;
-  transform:translateY(0) scale(1);
-  filter: blur(0);
+p.active{opacity:1; transform:translateY(0);}
+
+button{
+  margin:10px 5px 0 5px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff4d6d,#ff7eb3);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  transition:all 0.4s ease;
 }
+button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(0,0,0,0.4);}
 
-button {
-  margin: 10px 5px 0 5px;
-  padding: 14px 28px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #ff4d6d, #ff7eb3);
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  transition: all 0.4s ease;
-}
+.heart,.sparkle{position:absolute;font-size:18px;pointer-events:none;opacity:0.7;}
+@keyframes float{from{transform:translateY(0) rotate(0deg);}to{transform:translateY(-120vh) rotate(360deg);}}
 
-button:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 25px rgba(0,0,0,0.4); }
+.confetti{position:absolute;width:8px;height:8px;border-radius:50%;opacity:0.8;pointer-events:none;animation:confettiFall 3s linear infinite;}
+@keyframes confettiFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(360deg);opacity:0;}}
 
-.heart, .sparkle { position:absolute; font-size:18px; pointer-events:none; opacity:0.7; }
-
-@keyframes float { from {transform:translateY(0) rotate(0deg);} to{transform:translateY(-120vh) rotate(360deg);} }
-
-.confetti { position:absolute; width:8px; height:8px; border-radius:50%; opacity:0.8; pointer-events:none; animation:confettiFall 3s linear infinite; }
-@keyframes confettiFall {0% {transform:translateY(-10px) rotate(0deg); opacity:1;} 100% {transform:translateY(100vh) rotate(360deg); opacity:0;}}
-
-.flash-bg { position:absolute; width:100%; height:100%; top:0; left:0; background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%); pointer-events:none; opacity:0; animation:flash 0.6s forwards; }
-@keyframes flash {0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
+.flash-bg{position:absolute;width:100%;height:100%;top:0;left:0;background:radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);pointer-events:none;opacity:0;animation:flash 0.6s forwards;}
+@keyframes flash{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
 
 .page{display:none;}
 .page.active{display:block;}
 
-#page3 p { color:#000; opacity:1; transform:translateY(0) scale(1); }
+#page3 p{color:#000; opacity:1; transform:translateY(0) scale(1); font-weight:700; font-size:17px;}
+#page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc);}
+#page4 .letter{position:absolute;font-size:24px;font-weight:700;color:#ff4d6d;opacity:0;pointer-events:none; text-shadow: 1px1px 4px rgba(0,0,0,0.2);}
 </style>
 </head>
 <body>
 
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6b36db09d0.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6b36db09d0.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Page 1 -->
+<!-- PAGE1 -->
 <div class="card page active" id="page1">
-  <h1>for dilaa 💐</h1>
-  <p>aku harap kamuu baca sampai akhir 😊</p>
-  <p>eh..maafin aku yaaa dilaa🥺</p>
-  <p>aku tidak sengaja membentak kamuuu...</p>
-  <p>...sumpah aku sebenarnya tidak bermaksud membentak kamuu 😔</p>
-  <p>aku hanya bercandaa hehee 😁</p>
-  <p>karena kamu sangat lucu dan menggemaskan ketika sedang marah 🥰</p>
-  <p>aku haraapp...kita akan tetap bersahabat untuk selamanya 😊🤍</p>
-  <p>jangan bete terus dong cantik 😉</p>
-  <p>terimalah permintaan maafku wahai makhluk paling cantikkk sealam semesta ini 🫰💐</p>
-  <button id="nextBtn" style="display:none;" onclick="nextPage()">next cantik</button>
+<h1>for dilaa 💐</h1>
+<p style="font-style:italic;color:#555;font-size:14px;">klik tombolnya yaa cantikkk😉😉</p>
+
+<p data-text="aku harap kamuu baca sampai akhir 😊"></p>
+<p data-text="eh..maafin aku yaaa dilaa🥺"></p>
+<p data-text="aku tidak sengaja membentak kamuuu..."></p>
+<p data-text="...sumpah aku sebenarnya tidak bermaksud membentak kamuu 😔"></p>
+<p data-text="aku hanya bercandaa hehee 😁"></p>
+<p data-text="karena kamu sangat lucu dan menggemaskan ketika sedang marah 🥰"></p>
+<p data-text="aku haraapp...kita akan tetap bersahabat untuk selamanya 😊🤍"></p>
+<p data-text="jangan bete terus dong cantik 😉"></p>
+<p data-text="terimalah permintaan maafku wahai makhluk paling cantikkk sealam semesta ini 🫰💐"></p>
+
+<button id="showTextBtn">❤️</button>
+<button id="nextBtn" style="display:none;" onclick="showPage('page2')">next cantik</button>
 </div>
 
-<!-- Page 2 -->
+<!-- PAGE2 -->
 <div class="card page" id="page2">
-  <h1>pilih iya atau tidak untuk memaafkan aku🫰</h1>
-  <button onclick="choose(1)">iyaaaa 🥰</button>
-  <button onclick="choose(2)">tidakk 😔</button>
+<h1>pilih iya atau tidak untuk memaafkan aku🫰</h1>
+<button onclick="choose(1)">iyaaaa 🥰</button>
+<button onclick="choose(2)">tidakk 😔</button>
 </div>
 
-<!-- Page 3 / Ending -->
+<!-- PAGE3 -->
 <div class="card page" id="page3">
-  <h1>for dilaa 💐</h1>
-  <p>ih ganyangka kamu bakal maafin aku<br>MAACIIII KARENA SUDAH MEMAAFKAN AKUUUU🥰🥰😉</p>
-  <button onclick="showPage('page2')">kembali ↩️</button>
+<h1>for dilaa 💐</h1>
+<p>ih ganyangka kamu bakal maafin aku<br>MAACIIII KARENA SUDAH MEMAAFKAN AKUUUU🥰🥰😉</p>
+<button onclick="showPage('page4')">SURPRISE</button>
+</div>
+
+<!-- PAGE4 -->
+<div class="card page" id="page4">
+<h1>💖✨</h1>
 </div>
 
 <script>
-const music = document.getElementById("music");
+// MUSIK
+const music=document.getElementById("music");
+music.play().catch(()=>{});
 
-// Page1 teks muncul lebih lambat & mewah
-const page1 = document.getElementById("page1");
-const texts = page1.querySelectorAll("p");
-let tIndex = 0;
+// PAGE1 TYPING
+const page1=document.getElementById("page1");
+const paras=page1.querySelectorAll("p[data-text]");
+let pIndex=0;
+const showTextBtn=document.getElementById("showTextBtn");
+const nextBtn=document.getElementById("nextBtn");
+const typeSound=new Audio("https://freesound.org/data/previews/240/240777_4019022-lq.mp3");
 
-function showText(){
-  if(tIndex < texts.length){
-    texts[tIndex].classList.add("active");
-    if(tIndex===0) music.play();
-
-    // heart & sparkle muncul dramatis
-    for(let i=0;i<2;i++){
-      const h = document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-      h.style.left=(Math.random()*80+10)+"%";
-      h.style.animationDuration=(Math.random()*3+4)+"s";
-      h.style.fontSize=(Math.random()*14+12)+"px";
-      h.style.opacity=(Math.random()*0.5+0.5);
-      document.body.appendChild(h);
-
-      const s = document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-      s.style.left=(Math.random()*80+10)+"%";
-      s.style.animationDuration=(Math.random()*3+3)+"s";
-      s.style.fontSize=(Math.random()*12+10)+"px";
-      s.style.opacity=(Math.random()*0.5+0.5);
-      document.body.appendChild(s);
-    }
-
-    tIndex++;
-    setTimeout(showText, 1200); // lebih lambat, lebih dramatis
+function typeText(el,text,i=0){
+  if(i<text.length){
+    el.textContent+=text.charAt(i);
+    i++;
+    typeSound.currentTime=0; typeSound.play().catch(()=>{});
+    setTimeout(()=>typeText(el,text,i),50);
   } else {
-    document.getElementById("nextBtn").style.display="inline-block";
+    el.classList.add("active"); createHeartSparkle();
+    pIndex++;
+    if(pIndex===paras.length){ nextBtn.style.display="inline-block"; showTextBtn.style.display="none"; }
   }
 }
-showText();
 
-// page control
+showTextBtn.addEventListener("click",()=>{ if(pIndex<paras.length) typeText(paras[pIndex],paras[pIndex].dataset.text); });
+
+// HEART + SPARKLE
+function createHeartSparkle(){
+  for(let i=0;i<2;i++){
+    const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
+    h.style.left=Math.random()*80+10+"%"; h.style.animationDuration=Math.random()*3+4+"s";
+    h.style.fontSize=Math.random()*14+12+"px"; h.style.opacity=Math.random()*0.5+0.5;
+    document.body.appendChild(h);
+    const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
+    s.style.left=Math.random()*80+10+"%"; s.style.animationDuration=Math.random()*3+3+"s";
+    s.style.fontSize=Math.random()*12+10+"px"; s.style.opacity=Math.random()*0.5+0.5;
+    document.body.appendChild(s);
+  }
+}
+
+// PAGE CONTROL
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.getElementById(id).classList.add("active");
+  if(id=="page4") triggerPage4();
 }
 
-function nextPage(){ showPage("page2"); }
+function choose(option){ showPage("page3"); }
 
-function choose(option){ 
-  showPage("page3"); 
-  triggerEnding(); 
+// PAGE4 ANIMASI
+function triggerPage4(){
+  const loveText="LOVE";
+  const letters=[];
+  const page4=document.getElementById("page4");
+  page4.innerHTML="<h1>💖✨</h1>";
+
+  for(let i=0;i<60;i++){
+    const l=document.createElement("div"); l.className="letter";
+    l.textContent=loveText.charAt(Math.floor(Math.random()*loveText.length));
+    l.style.left=Math.random()*100+"vw";
+    l.style.top=Math.random()*100+"vh";
+    page4.appendChild(l);
+    letters.push(l);
+    animateLetter(l);
+  }
+
+  setTimeout(()=>{ formHeart(letters); },3500);
 }
 
-// kembali ke page1 dari page2
-function goBackToPage1(){ 
-  showPage("page1"); 
-  texts.forEach(p => p.classList.remove("active")); 
-  tIndex=0; 
-  showText();
+function animateLetter(l){
+  const x=Math.random()*window.innerWidth;
+  const y=Math.random()*window.innerHeight;
+  const scale= Math.random()*1.5+0.5;
+  const duration= Math.random()*2+2;
+  l.style.opacity=1;
+  l.style.transition=`all ${duration}s ease-in-out`;
+  l.style.transform=`translate(${x}px, ${y}px) scale(${scale}) rotate(${Math.random()*360}deg)`;
 }
 
-// ending animasi
-function triggerEnding(){
-  for(let i=0;i<70;i++){
-    const c=document.createElement("div"); c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
-    c.style.animationDuration=(Math.random()*2+2)+"s";
-    document.body.appendChild(c);
-  }
-  for(let i=0;i<40;i++){
-    const h = document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(Math.random()*3+3)+"s";
-    h.style.fontSize=(Math.random()*18+14)+"px";
-    document.body.appendChild(h);
-  }
-  for(let i=0;i<30;i++){
-    const s = document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=(Math.random()*3+2)+"s";
-    s.style.fontSize=(Math.random()*12+12)+"px";
-    document.body.appendChild(s);
-  }
-  const flash=document.createElement("div"); flash.className="flash-bg";
-  document.body.appendChild(flash);
+function formHeart(letters){
+  const centerX=window.innerWidth/2;
+  const centerY=window.innerHeight/2;
+  let angleStep=Math.PI/letters.length;
+  letters.forEach((l,i)=>{
+    let angle=i*angleStep*4-Math.PI;
+    let radius=120;
+    let x=centerX+radius*Math.cos(angle);
+    let y=centerY+radius*Math.sin(angle)-50;
+    l.style.transition="all 2s ease-in-out";
+    l.style.transform=`translate(${x}px,${y}px) scale(2) rotate(0deg)`;
+    l.style.color="#ff4d6d";
+  });
+
+  setTimeout(()=>{
+    for(let i=0;i<120;i++){
+      const c=document.createElement("div"); c.className="confetti";
+      c.style.left=Math.random()*100+"vw";
+      c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
+      c.style.animationDuration=(Math.random()*2+2)+"s";
+      document.body.appendChild(c);
+    }
+    for(let i=0;i<60;i++){
+      const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
+      h.style.left=Math.random()*100+"vw";
+      h.style.animationDuration=(Math.random()*3+3)+"s";
+      h.style.fontSize=(Math.random()*20+14)+"px"; document.body.appendChild(h);
+    }
+    for(let i=0;i<50;i++){
+      const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
+      s.style.left=Math.random()*100+"vw";
+      s.style.animationDuration=(Math.random()*3+2)+"s";
+      s.style.fontSize=(Math.random()*14+12)+"px"; document.body.appendChild(s);
+    }
+    const flash=document.createElement("div"); flash.className="flash-bg";
+    document.body.appendChild(flash);
+  },2000);
 }
 </script>
-
 </body>
 </html>
