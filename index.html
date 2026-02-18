@@ -21,8 +21,8 @@ body{
 @keyframes bgAnim{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 .card{position:relative;background:rgba(255,255,255,0.95);padding:30px;border-radius:25px;width:90%;max-width:450px;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.3);z-index:2;}
 h1{color:#ff4d6d;margin-bottom:15px;text-shadow:1px 1px 5px rgba(0,0,0,0.2);font-weight:700;}
-p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0;}
-button{margin:10px 5px 0 5px;padding:12px 28px;border:none;border-radius:30px;background:linear-gradient(135deg,#ff4d6d,#ff7eb3);color:white;font-size:16px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.3);transition:all 0.4s ease;}
+p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0; transition: all 0.3s ease;}
+button{margin:10px 5px 0 5px;padding:12px 28px;border:none;border-radius:30px;background:linear-gradient(135deg,#ff4d6d,#ff7eb3);color:white;font-size:16px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.3);transition:all 0.3s ease;}
 button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(0,0,0,0.4);}
 .heart,.sparkle{position:absolute;font-size:18px;pointer-events:none;opacity:0.7;}
 @keyframes float{from{transform:translateY(0) rotate(0deg);}to{transform:translateY(-120vh) rotate(360deg);}}
@@ -33,7 +33,6 @@ button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(
 .page{display:none;}.page.active{display:block;}
 #page3 p{color:#000; opacity:1; transform:translateY(0) scale(1); font-weight:700; font-size:17px;}
 #page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc);}
-#page4 .letter{position:absolute;font-size:24px;font-weight:700;color:#ff4d6d;opacity:0;pointer-events:none; text-shadow:1px1px4px rgba(0,0,0,0.2);}
 input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%;font-family:'Playfair Display', serif;}
 </style>
 </head>
@@ -87,7 +86,7 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 
 <!-- PAGE4 -->
 <div class="card page" id="page4">
-<h1>aku janji bakal beliin kamu es krim dan tidak akan membentak kamu lagii 😉🫰</h1>
+<h1 id="page4Text" style="opacity:0; transition: all 0.8s ease;">aku janji bakal beliin kamu es krim dan tidak akan ngebentak kamu lagii😉🫰</h1>
 </div>
 
 <script>
@@ -124,43 +123,27 @@ function login(){
   welcomeText.style.position="absolute"; welcomeText.style.top="40%"; welcomeText.style.left="50%";
   welcomeText.style.transform="translateX(-50%)"; welcomeText.style.color="#ff4d6d";
   welcomeText.style.fontFamily="'Playfair Display', serif"; welcomeText.style.fontSize="28px";
-  welcomeText.style.zIndex=11; welcomeText.textContent="";
+  welcomeText.style.zIndex=11; welcomeText.textContent=`Selamat datang, ${name}! 🫰`;
   document.body.appendChild(welcomeText);
   
-  let i=0; const message=`Selamat datang, ${name}! 🫰`;
-  function typeLetter(){
-    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; clickSound.play(); setTimeout(typeLetter,50);}
-    else { setTimeout(()=>{overlay.remove(); welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play();},1500);}
-  }
-  typeLetter();
+  setTimeout(()=>{overlay.remove(); welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play(); startPage1Anim();},1500);
 }
 
-// PAGE1 TYPING
+// PAGE1 FAST TEXT ANIMATION
 const page1=document.getElementById("page1");
 const paras=page1.querySelectorAll("p[data-text]");
 let pIndex=0;
 const showTextBtn=document.getElementById("showTextBtn");
 const nextBtn=document.getElementById("nextBtn");
 
-function typeText(el,text,i=0){
-  if(i<text.length){ el.textContent+=text.charAt(i); i++; clickSound.play(); setTimeout(()=>typeText(el,text,i),35);}
-  else{ el.style.opacity=1; createHeartSparkle(); pIndex++; if(pIndex===paras.length){ nextBtn.style.display="inline-block"; showTextBtn.style.display="none";}}
+function startPage1Anim(){
+  paras.forEach((p,i)=>{
+    setTimeout(()=>{ p.textContent=p.dataset.text; p.style.opacity=1; }, i*200); // muncul cepat & mewah
+  });
+  setTimeout(()=>{ nextBtn.style.display="inline-block"; showTextBtn.style.display="none"; }, paras.length*200);
 }
-showTextBtn.addEventListener("click",()=>{ if(pIndex<paras.length) typeText(paras[pIndex],paras[pIndex].dataset.text); });
 
-// HEART + SPARKLE
-function createHeartSparkle(){
-  for(let i=0;i<2;i++){
-    const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-    h.style.left=Math.random()*80+10+"%"; h.style.animationDuration=Math.random()*3+4+"s";
-    h.style.fontSize=Math.random()*14+12+"px"; h.style.opacity=Math.random()*0.5+0.5;
-    document.body.appendChild(h);
-    const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-    s.style.left=Math.random()*80+10+"%"; s.style.animationDuration=Math.random()*3+3+"s";
-    s.style.fontSize=Math.random()*12+10+"px"; s.style.opacity=Math.random()*0.5+0.5;
-    document.body.appendChild(s);
-  }
-}
+showTextBtn.addEventListener("click",startPage1Anim);
 
 // PAGE CONTROL
 function showPage(id){
@@ -171,82 +154,23 @@ function showPage(id){
 
 function choose(option){ showPage("page3"); }
 
-// PAGE4: huruf random → terbang → membentuk LOVE interaktif
+// PAGE4 FADE-IN TEXT
 function triggerPage4(){
-  const page4=document.getElementById("page4");
-  page4.innerHTML="<h1>💖✨</h1>";
-  const letters=[];
-  const text="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789💗✨";
-  
-  for(let i=0;i<150;i++){
-    const l=document.createElement("div"); 
-    l.className="letter";
-    l.textContent=text.charAt(Math.floor(Math.random()*text.length));
-    l.style.left=Math.random()*window.innerWidth+"px";
-    l.style.top=Math.random()*window.innerHeight+"px";
-    page4.appendChild(l);
-    letters.push(l);
-    
-    animateLetterRandom(l);
-    
-    l.addEventListener("click", ()=>{
-      const x=Math.random()*window.innerWidth;
-      const y=Math.random()*window.innerHeight;
-      const scale=Math.random()*1.5+0.5;
-      l.style.transition=`all 1.5s ease-in-out`;
-      l.style.transform=`translate(${x}px, ${y}px) scale(${scale}) rotate(${Math.random()*360}deg)`;
-      clickSound.play();
-    });
+  const text=document.getElementById("page4Text");
+  text.style.opacity=1;
+  // optional: tambah heart + sparkle mewah
+  for(let i=0;i<40;i++){
+    const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+3)+"s";
+    h.style.fontSize=(Math.random()*18+12)+"px";
+    document.body.appendChild(h);
+    const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(Math.random()*3+2)+"s";
+    s.style.fontSize=(Math.random()*14+10)+"px";
+    document.body.appendChild(s);
   }
-  
-  setTimeout(()=>formLoveInteractive(letters),2500);
-}
-
-function animateLetterRandom(l){
-  const x=Math.random()*window.innerWidth;
-  const y=Math.random()*window.innerHeight;
-  const scale=Math.random()*1.5+0.5;
-  l.style.opacity=1;
-  l.style.transition=`all ${Math.random()*2+2}s ease-in-out`;
-  l.style.transform=`translate(${x}px, ${y}px) scale(${scale}) rotate(${Math.random()*360}deg)`;
-}
-
-function formLoveInteractive(letters){
-  const centerX=window.innerWidth/2;
-  const centerY=window.innerHeight/2;
-  const radius=120;
-  letters.forEach((l,i)=>{
-    const angle=i*(2*Math.PI/letters.length);
-    const x=centerX+radius*Math.cos(angle);
-    const y=centerY+radius*Math.sin(angle)-50;
-    l.style.transition="all 2s ease-in-out";
-    l.style.transform=`translate(${x}px,${y}px) scale(1.5) rotate(0deg)`;
-    l.style.color="#ff4d6d";
-  });
-
-  setTimeout(()=>{
-    for(let i=0;i<120;i++){
-      const c=document.createElement("div"); c.className="confetti";
-      c.style.left=Math.random()*100+"vw";
-      c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
-      c.style.animationDuration=(Math.random()*2+2)+"s";
-      document.body.appendChild(c);
-    }
-    for(let i=0;i<60;i++){
-      const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-      h.style.left=Math.random()*100+"vw";
-      h.style.animationDuration=(Math.random()*3+3)+"s";
-      h.style.fontSize=(Math.random()*20+14)+"px"; document.body.appendChild(h);
-    }
-    for(let i=0;i<50;i++){
-      const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-      s.style.left=Math.random()*100+"vw";
-      s.style.animationDuration=(Math.random()*3+2)+"s";
-      s.style.fontSize=(Math.random()*14+12)+"px"; document.body.appendChild(s);
-    }
-    const flash=document.createElement("div"); flash.className="flash-bg";
-    document.body.appendChild(flash);
-  },2000);
 }
 </script>
 </body>
