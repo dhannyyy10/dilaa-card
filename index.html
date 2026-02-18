@@ -43,9 +43,11 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6b36db09d0.mp3" type="audio/mpeg">
 </audio>
 
+<audio id="clickSound" src="https://freesound.org/data/previews/256/256113_3263906-lq.mp3"></audio>
+
 <!-- LOGIN PAGE -->
 <div class="card page active" id="loginPage">
-<h1>selamat datang 💐</h1>
+<h1 style="font-size:28px;">selamat datang 💐</h1>
 <p>masukkan namamu ya cantik 😉</p>
 <input type="text" id="nameInput" placeholder="Nama kamu...">
 <br>
@@ -90,13 +92,13 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 
 <script>
 const music=document.getElementById("music");
+const clickSound=document.getElementById("clickSound");
 
-// LOGIN + ANIMASI CINEMATIC
+// LOGIN
 function login(){
   const name=document.getElementById("nameInput").value.trim();
   if(name===""){ alert("tolong isi nama kamu dulu 😅"); return; }
-  const loginPage=document.getElementById("loginPage");
-  loginPage.classList.remove("active");
+  document.getElementById("loginPage").classList.remove("active");
   
   const overlay=document.createElement("div");
   overlay.style.position="absolute"; overlay.style.top=0; overlay.style.left=0;
@@ -121,12 +123,13 @@ function login(){
   const welcomeText=document.createElement("h1");
   welcomeText.style.position="absolute"; welcomeText.style.top="40%"; welcomeText.style.left="50%";
   welcomeText.style.transform="translateX(-50%)"; welcomeText.style.color="#ff4d6d";
-  welcomeText.style.fontFamily="'Playfair Display', serif"; welcomeText.style.fontSize="36px"; welcomeText.style.zIndex=11; welcomeText.textContent="";
+  welcomeText.style.fontFamily="'Playfair Display', serif"; welcomeText.style.fontSize="28px";
+  welcomeText.style.zIndex=11; welcomeText.textContent="";
   document.body.appendChild(welcomeText);
   
   let i=0; const message=`Selamat datang, ${name}! 🫰`;
   function typeLetter(){
-    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; setTimeout(typeLetter,50);}
+    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; clickSound.play(); setTimeout(typeLetter,50);}
     else { setTimeout(()=>{overlay.remove(); welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play();},1500);}
   }
   typeLetter();
@@ -140,7 +143,7 @@ const showTextBtn=document.getElementById("showTextBtn");
 const nextBtn=document.getElementById("nextBtn");
 
 function typeText(el,text,i=0){
-  if(i<text.length){ el.textContent+=text.charAt(i); i++; setTimeout(()=>typeText(el,text,i),35);}
+  if(i<text.length){ el.textContent+=text.charAt(i); i++; clickSound.play(); setTimeout(()=>typeText(el,text,i),35);}
   else{ el.style.opacity=1; createHeartSparkle(); pIndex++; if(pIndex===paras.length){ nextBtn.style.display="inline-block"; showTextBtn.style.display="none";}}
 }
 showTextBtn.addEventListener("click",()=>{ if(pIndex<paras.length) typeText(paras[pIndex],paras[pIndex].dataset.text); });
@@ -192,6 +195,7 @@ function triggerPage4(){
       const scale=Math.random()*1.5+0.5;
       l.style.transition=`all 1.5s ease-in-out`;
       l.style.transform=`translate(${x}px, ${y}px) scale(${scale}) rotate(${Math.random()*360}deg)`;
+      clickSound.play();
     });
   }
   
@@ -246,5 +250,4 @@ function formLoveInteractive(letters){
 }
 </script>
 </body>
-                                                                                       </html>
-                                                                                       
+</html>
