@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>dilaa 💖</title>
+<title>surat maafku untuk kanjeng ratu</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -21,7 +21,7 @@ body{
 @keyframes bgAnim{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 .card{position:relative;background:rgba(255,255,255,0.95);padding:30px;border-radius:25px;width:90%;max-width:450px;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.3);z-index:2;}
 h1{color:#ff4d6d;margin-bottom:15px;text-shadow:1px 1px 5px rgba(0,0,0,0.2);font-weight:700;}
-p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0;transition:all 0.4s ease;}
+p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0;}
 button{margin:10px 5px 0 5px;padding:12px 28px;border:none;border-radius:30px;background:linear-gradient(135deg,#ff4d6d,#ff7eb3);color:white;font-size:16px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.3);transition:all 0.4s ease;}
 button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(0,0,0,0.4);}
 .heart,.sparkle{position:absolute;font-size:18px;pointer-events:none;opacity:0.7;}
@@ -32,21 +32,24 @@ button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(
 @keyframes flash{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
 .page{display:none;}.page.active{display:block;}
 #page3 p{color:#000; opacity:1; transform:translateY(0) scale(1); font-weight:700; font-size:17px;}
-#page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc); position:relative;}
-#page4 .letter{position:absolute;font-size:22px;font-weight:700;color:#ff4d6d;text-shadow:0 0 6px #ff4d6d,0 0 12px #ff7eb3;opacity:0;pointer-events:none;}
+#page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc); text-align:center;}
+#page4 .letter{position:absolute;font-size:24px;font-weight:700;color:#ff4d6d;opacity:0;pointer-events:none; text-shadow:1px1px4px rgba(0,0,0,0.2);}
 input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%;font-family:'Playfair Display', serif;}
 </style>
 </head>
 <body>
 
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6b36db09d0.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2021/09/14/audio_01ef9a57c1.mp3" type="audio/mpeg">
 </audio>
+<audio id="whoosh" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_5c5c570c55.mp3"></audio>
 
 <!-- LOGIN PAGE -->
 <div class="card page active" id="loginPage">
-<h1 style="font-size:28px;">selamat datang 💐</h1>
-<input type="text" id="nameInput" placeholder="Nama kamu..."><br>
+<h1>selamat datang 💐</h1>
+<p>masukkan nama kamu ya cantik 😉</p>
+<input type="text" id="nameInput" placeholder="Nama kamu...">
+<br>
 <button onclick="login()">masuk 🫰</button>
 </div>
 
@@ -55,7 +58,7 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 <h1>for dilaa 💐</h1>
 <p style="font-style:italic;color:#555;font-size:14px;">klik tombolnya yaa cantikkk😉😉</p>
 <p data-text="aku harap kamuu baca sampai akhir 😊"></p>
-<p data-text="eh..maafin aku yaaa dilaa🥺"></p>
+<p data-text="dilaa maafin aku yaaa 🥺"></p>
 <p data-text="aku tidak sengaja membentak kamuuu..."></p>
 <p data-text="...sumpah aku sebenarnya tidak bermaksud membentak kamuu 😔"></p>
 <p data-text="aku hanya bercandaa hehee 😁"></p>
@@ -82,39 +85,59 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 </div>
 
 <!-- PAGE4 -->
-<div class="card page" id="page4"></div>
+<div class="card page" id="page4">
+<h1>aku janji bakal beliin kamu es krim dan tidak akan ngebentak kamu lagii 😉🫰</h1>
+</div>
 
 <script>
-const music=document.getElementById("music");
+const bgMusic=document.getElementById("bgMusic");
+const whoosh=document.getElementById("whoosh");
 
-// LOGIN
+// LOGIN + CINEMATIC
 function login(){
   const name=document.getElementById("nameInput").value.trim();
   if(name===""){ alert("tolong isi nama kamu dulu 😅"); return; }
-  document.getElementById("loginPage").classList.remove("active");
+  const loginPage=document.getElementById("loginPage");
+  loginPage.classList.remove("active");
+  
+  const overlay=document.createElement("div");
+  overlay.style.position="absolute"; overlay.style.top=0; overlay.style.left=0;
+  overlay.style.width="100%"; overlay.style.height="100%";
+  overlay.style.background="radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)";
+  overlay.style.zIndex=10;
+  document.body.appendChild(overlay);
+  
+  for(let i=0;i<30;i++){
+    const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+3)+"s";
+    h.style.fontSize=(Math.random()*18+12)+"px";
+    document.body.appendChild(h);
+    const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(Math.random()*3+2)+"s";
+    s.style.fontSize=(Math.random()*14+10)+"px";
+    document.body.appendChild(s);
+  }
   
   const welcomeText=document.createElement("h1");
-  welcomeText.style.position="absolute";
-  welcomeText.style.top="40%";
-  welcomeText.style.left="50%";
+  welcomeText.style.position="absolute"; welcomeText.style.top="40%"; welcomeText.style.left="50%";
   welcomeText.style.transform="translateX(-50%)";
   welcomeText.style.color="#ff4d6d";
   welcomeText.style.fontFamily="'Playfair Display', serif";
-  welcomeText.style.fontSize="32px";
-  welcomeText.style.zIndex=11;
-  welcomeText.textContent="";
+  welcomeText.style.fontSize="28px";
+  welcomeText.style.zIndex=11; welcomeText.textContent="";
   document.body.appendChild(welcomeText);
   
-  const message=`Selamat datang, ${name}! 🫰`;
-  let i=0;
+  let i=0; const message=`selamat datang, ${name}! 🫰`;
   function typeLetter(){
-    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; setTimeout(typeLetter,50);}
-    else { setTimeout(()=>{welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play();},800);}
+    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; setTimeout(typeLetter,35);}
+    else { setTimeout(()=>{overlay.remove(); welcomeText.remove(); document.getElementById("page1").classList.add("active"); bgMusic.play();},800);}
   }
   typeLetter();
 }
 
-// PAGE1: animasi teks muncul cepat + tombol usaha
+// PAGE1 TEXT SHOW BUTTON
 const page1=document.getElementById("page1");
 const paras=page1.querySelectorAll("p[data-text]");
 let pIndex=0;
@@ -150,86 +173,51 @@ function showPage(id){
 
 function choose(option){ showPage("page3"); }
 
-// PAGE4 Mewah: huruf random → melingkar → kalimat
+// PAGE4: huruf terbang membentuk teks
 function triggerPage4(){
   const page4=document.getElementById("page4");
-  page4.innerHTML="";
-  const text="aku janji bakal beliin kamu es krim dan tidak akan ngebentak kamu lagii 😉🫰";
   const letters=[];
-  for(let i=0;i<text.length;i++){
-    const l=document.createElement("span");
+  const text="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const displayText="aku janji bakal beliin kamu es krim dan tidak akan ngebentak kamu lagii 😉🫰";
+
+  page4.innerHTML=`<h1 style="margin-bottom:20px;">${displayText}</h1>`;
+
+  for(let i=0;i<120;i++){
+    const l=document.createElement("div"); 
     l.className="letter";
-    l.textContent=text.charAt(i);
-    l.style.position="absolute";
+    l.textContent=text.charAt(Math.floor(Math.random()*text.length));
+    l.style.left=Math.random()*page4.clientWidth+"px";
+    l.style.top=Math.random()*page4.clientHeight+"px";
     l.style.opacity=0;
-    l.style.fontSize="22px";
-    l.style.fontWeight="700";
-    l.style.color="#ff4d6d";
-    l.style.textShadow="0 0 6px #ff4d6d,0 0 12px #ff7eb3";
-    l.style.left=Math.random()*(page4.clientWidth-20)+"px";
-    l.style.top=Math.random()*(page4.clientHeight-20)+"px";
     page4.appendChild(l);
     letters.push(l);
 
     setTimeout(()=>{
+      whoosh.currentTime = 0;
+      whoosh.volume = 0.6;
+      whoosh.play().catch(()=>{});
       l.style.transition="all 1s ease-in-out";
       l.style.opacity=1;
+      const x=Math.random()*page4.clientWidth;
+      const y=Math.random()*page4.clientHeight;
+      l.style.transform = `translate(${x}px, ${y}px) scale(1)`;
     }, i*15);
   }
 
-  // melingkar → rapikan kalimat
+  // bentuk huruf melingkar membentuk hati
   setTimeout(()=>{
     const centerX=page4.clientWidth/2;
-    const centerY=page4.clientHeight/2;
-    const radius=150;
-
+    const centerY=page4.clientHeight/2 + 20;
+    const radius=120;
     letters.forEach((l,i)=>{
-      const angle=(i/(letters.length-1))*Math.PI*2;
-      const x=centerX + radius*Math.cos(angle) - 12;
-      const y=centerY + radius*Math.sin(angle) - 12;
+      const angle=i*(2*Math.PI/letters.length);
+      const x=centerX+radius*Math.cos(angle);
+      const y=centerY+radius*Math.sin(angle)-50;
       l.style.transition="all 2s ease-in-out";
-      l.style.left=x+"px";
-      l.style.top=y+"px";
-      l.style.transform="translate(0,0) scale(1.2)";
+      l.style.transform=`translate(${x}px,${y}px) scale(1.2) rotate(0deg)`;
+      l.style.color="#ff4d6d";
     });
-
-    setTimeout(()=>{
-      letters.forEach((l,i)=>{
-        const finalX=centerX - (letters.length*12)/2 + i*12;
-        const finalY=centerY;
-        l.style.transition="all 1.5s ease-in-out";
-        l.style.left=finalX+"px";
-        l.style.top=finalY+"px";
-        l.style.transform="translate(0,0) scale(1.3)";
-      });
-    },2500);
-
-    // confetti + hearts + sparkles
-    setTimeout(()=>{
-      for(let i=0;i<100;i++){
-        const c=document.createElement("div"); c.className="confetti";
-        c.style.left=Math.random()*100+"%";
-        c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
-        c.style.animationDuration=(Math.random()*2+2)+"s";
-        page4.appendChild(c);
-      }
-      for(let i=0;i<50;i++){
-        const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-        h.style.left=Math.random()*100+"%";
-        h.style.animationDuration=(Math.random()*3+3)+"s";
-        h.style.fontSize=(Math.random()*20+14)+"px"; page4.appendChild(h);
-      }
-      for(let i=0;i<40;i++){
-        const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-        s.style.left=Math.random()*100+"%";
-        s.style.animationDuration=(Math.random()*3+2)+"s";
-        s.style.fontSize=(Math.random()*14+12)+"px"; page4.appendChild(s);
-      }
-      const flash=document.createElement("div"); flash.className="flash-bg";
-      page4.appendChild(flash);
-    },4000);
-
-  },800);
+  },2500);
 }
 </script>
 </body>
