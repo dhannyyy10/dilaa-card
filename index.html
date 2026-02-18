@@ -21,7 +21,7 @@ body{
 @keyframes bgAnim{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 .card{position:relative;background:rgba(255,255,255,0.95);padding:30px;border-radius:25px;width:90%;max-width:450px;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.3);z-index:2;}
 h1{color:#ff4d6d;margin-bottom:15px;text-shadow:1px 1px 5px rgba(0,0,0,0.2);font-weight:700;}
-p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0;}
+p{font-size:16px;line-height:1.8;color:#333;margin:12px 0;opacity:0;transition:all 0.4s ease;}
 button{margin:10px 5px 0 5px;padding:12px 28px;border:none;border-radius:30px;background:linear-gradient(135deg,#ff4d6d,#ff7eb3);color:white;font-size:16px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.3);transition:all 0.4s ease;}
 button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(0,0,0,0.4);}
 .heart,.sparkle{position:absolute;font-size:18px;pointer-events:none;opacity:0.7;}
@@ -32,8 +32,8 @@ button:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 12px 25px rgba(
 @keyframes flash{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
 .page{display:none;}.page.active{display:block;}
 #page3 p{color:#000; opacity:1; transform:translateY(0) scale(1); font-weight:700; font-size:17px;}
-#page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc);}
-#page4 .letter{position:absolute;font-size:24px;font-weight:700;color:#ff4d6d;opacity:0;pointer-events:none; text-shadow:1px1px4px rgba(0,0,0,0.2);}
+#page4{overflow:hidden; background:linear-gradient(135deg,#caf0f8,#bde0fe,#a8dadc); position:relative;}
+#page4 .letter{position:absolute;font-size:22px;font-weight:700;color:#ff4d6d;text-shadow:0 0 6px #ff4d6d,0 0 12px #ff7eb3;opacity:0;pointer-events:none;}
 input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%;font-family:'Playfair Display', serif;}
 </style>
 </head>
@@ -45,17 +45,15 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 
 <!-- LOGIN PAGE -->
 <div class="card page active" id="loginPage">
-<h1>selamat datang 💐</h1>
-<p>masukkan namamu ya cantik 😉</p>
-<input type="text" id="nameInput" placeholder="Nama kamu...">
-<br>
+<h1 style="font-size:28px;">selamat datang 💐</h1>
+<input type="text" id="nameInput" placeholder="Nama kamu..."><br>
 <button onclick="login()">masuk 🫰</button>
 </div>
 
 <!-- PAGE1 -->
 <div class="card page" id="page1">
 <h1>for dilaa 💐</h1>
-<p style="font-style:italic;color:#ff4d6d;font-size:14px;">klik tombolnya yaa cantikkk😉😉</p>
+<p style="font-style:italic;color:#555;font-size:14px;">klik tombolnya yaa cantikkk😉😉</p>
 <p data-text="aku harap kamuu baca sampai akhir 😊"></p>
 <p data-text="eh..maafin aku yaaa dilaa🥺"></p>
 <p data-text="aku tidak sengaja membentak kamuuu..."></p>
@@ -84,55 +82,39 @@ input{padding:10px 15px;border-radius:20px;border:none;margin-top:10px;width:70%
 </div>
 
 <!-- PAGE4 -->
-<div class="card page" id="page4">
-<h1>loading animasi...</h1>
-</div>
+<div class="card page" id="page4"></div>
 
 <script>
 const music=document.getElementById("music");
 
-// LOGIN + ANIMASI CINEMATIC
+// LOGIN
 function login(){
   const name=document.getElementById("nameInput").value.trim();
   if(name===""){ alert("tolong isi nama kamu dulu 😅"); return; }
-  const loginPage=document.getElementById("loginPage");
-  loginPage.classList.remove("active");
-  
-  const overlay=document.createElement("div");
-  overlay.style.position="absolute"; overlay.style.top=0; overlay.style.left=0;
-  overlay.style.width="100%"; overlay.style.height="100%";
-  overlay.style.background="radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)";
-  overlay.style.zIndex=10;
-  document.body.appendChild(overlay);
-  
-  for(let i=0;i<30;i++){
-    const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=(Math.random()*3+3)+"s";
-    h.style.fontSize=(Math.random()*18+12)+"px";
-    document.body.appendChild(h);
-    const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=(Math.random()*3+2)+"s";
-    s.style.fontSize=(Math.random()*14+10)+"px";
-    document.body.appendChild(s);
-  }
+  document.getElementById("loginPage").classList.remove("active");
   
   const welcomeText=document.createElement("h1");
-  welcomeText.style.position="absolute"; welcomeText.style.top="40%"; welcomeText.style.left="50%";
-  welcomeText.style.transform="translateX(-50%)"; welcomeText.style.color="#ff4d6d";
-  welcomeText.style.fontFamily="'Playfair Display', serif"; welcomeText.style.fontSize="30px"; welcomeText.style.zIndex=11; welcomeText.textContent="";
+  welcomeText.style.position="absolute";
+  welcomeText.style.top="40%";
+  welcomeText.style.left="50%";
+  welcomeText.style.transform="translateX(-50%)";
+  welcomeText.style.color="#ff4d6d";
+  welcomeText.style.fontFamily="'Playfair Display', serif";
+  welcomeText.style.fontSize="32px";
+  welcomeText.style.zIndex=11;
+  welcomeText.textContent="";
   document.body.appendChild(welcomeText);
   
-  let i=0; const message=`Selamat datang, ${name}! 🫰`;
+  const message=`Selamat datang, ${name}! 🫰`;
+  let i=0;
   function typeLetter(){
-    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; setTimeout(typeLetter,40);}
-    else { setTimeout(()=>{overlay.remove(); welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play();},1200);}
+    if(i<message.length){ welcomeText.textContent+=message.charAt(i); i++; setTimeout(typeLetter,50);}
+    else { setTimeout(()=>{welcomeText.remove(); document.getElementById("page1").classList.add("active"); music.play();},800);}
   }
   typeLetter();
 }
 
-// PAGE1 ANIMASI MASUK CEPET + BUTTON
+// PAGE1: animasi teks muncul cepat + tombol usaha
 const page1=document.getElementById("page1");
 const paras=page1.querySelectorAll("p[data-text]");
 let pIndex=0;
@@ -140,11 +122,12 @@ const showTextBtn=document.getElementById("showTextBtn");
 const nextBtn=document.getElementById("nextBtn");
 
 function typeText(el,text,i=0){
-  if(i<text.length){ el.textContent+=text.charAt(i); i++; setTimeout(()=>typeText(el,text,i),20);} // lebih cepat
+  if(i<text.length){ el.textContent+=text.charAt(i); i++; setTimeout(()=>typeText(el,text,i),20);}
   else{ el.style.opacity=1; createHeartSparkle(); pIndex++; if(pIndex===paras.length){ nextBtn.style.display="inline-block"; showTextBtn.style.display="none";}}
 }
 showTextBtn.addEventListener("click",()=>{ if(pIndex<paras.length) typeText(paras[pIndex],paras[pIndex].dataset.text); });
 
+// HEART + SPARKLE
 function createHeartSparkle(){
   for(let i=0;i<2;i++){
     const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
@@ -167,58 +150,87 @@ function showPage(id){
 
 function choose(option){ showPage("page3"); }
 
-// PAGE4: huruf random → membentuk kalimat final
+// PAGE4 Mewah: huruf random → melingkar → kalimat
 function triggerPage4(){
   const page4=document.getElementById("page4");
-  page4.innerHTML="<h1></h1>";
+  page4.innerHTML="";
   const text="aku janji bakal beliin kamu es krim dan tidak akan ngebentak kamu lagii 😉🫰";
   const letters=[];
-  
   for(let i=0;i<text.length;i++){
-    const l=document.createElement("div");
+    const l=document.createElement("span");
     l.className="letter";
     l.textContent=text.charAt(i);
-    l.style.left=Math.random()*window.innerWidth+"px";
-    l.style.top=Math.random()*window.innerHeight+"px";
+    l.style.position="absolute";
     l.style.opacity=0;
+    l.style.fontSize="22px";
+    l.style.fontWeight="700";
+    l.style.color="#ff4d6d";
+    l.style.textShadow="0 0 6px #ff4d6d,0 0 12px #ff7eb3";
+    l.style.left=Math.random()*(page4.clientWidth-20)+"px";
+    l.style.top=Math.random()*(page4.clientHeight-20)+"px";
     page4.appendChild(l);
     letters.push(l);
-    
+
     setTimeout(()=>{
       l.style.transition="all 1s ease-in-out";
       l.style.opacity=1;
-      l.style.left=50 + i*12 + "px";
-      l.style.top=window.innerHeight/2 + "px";
-      l.style.transform="translate(-50%,-50%) scale(1)";
-      l.style.color="#ff4d6d";
-    }, i*25); // lebih cepat
+    }, i*15);
   }
 
+  // melingkar → rapikan kalimat
   setTimeout(()=>{
-    for(let i=0;i<80;i++){
-      const c=document.createElement("div"); c.className="confetti";
-      c.style.left=Math.random()*100+"vw";
-      c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
-      c.style.animationDuration=(Math.random()*2+2)+"s";
-      document.body.appendChild(c);
-    }
-    for(let i=0;i<40;i++){
-      const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
-      h.style.left=Math.random()*100+"vw";
-      h.style.animationDuration=(Math.random()*3+3)+"s";
-      h.style.fontSize=(Math.random()*20+14)+"px"; document.body.appendChild(h);
-    }
-    for(let i=0;i<30;i++){
-      const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
-      s.style.left=Math.random()*100+"vw";
-      s.style.animationDuration=(Math.random()*3+2)+"s";
-      s.style.fontSize=(Math.random()*14+12)+"px"; document.body.appendChild(s);
-    }
-    const flash=document.createElement("div"); flash.className="flash-bg";
-    document.body.appendChild(flash);
-  },2000);
+    const centerX=page4.clientWidth/2;
+    const centerY=page4.clientHeight/2;
+    const radius=150;
+
+    letters.forEach((l,i)=>{
+      const angle=(i/(letters.length-1))*Math.PI*2;
+      const x=centerX + radius*Math.cos(angle) - 12;
+      const y=centerY + radius*Math.sin(angle) - 12;
+      l.style.transition="all 2s ease-in-out";
+      l.style.left=x+"px";
+      l.style.top=y+"px";
+      l.style.transform="translate(0,0) scale(1.2)";
+    });
+
+    setTimeout(()=>{
+      letters.forEach((l,i)=>{
+        const finalX=centerX - (letters.length*12)/2 + i*12;
+        const finalY=centerY;
+        l.style.transition="all 1.5s ease-in-out";
+        l.style.left=finalX+"px";
+        l.style.top=finalY+"px";
+        l.style.transform="translate(0,0) scale(1.3)";
+      });
+    },2500);
+
+    // confetti + hearts + sparkles
+    setTimeout(()=>{
+      for(let i=0;i<100;i++){
+        const c=document.createElement("div"); c.className="confetti";
+        c.style.left=Math.random()*100+"%";
+        c.style.backgroundColor=`hsl(${Math.random()*360},100%,75%)`;
+        c.style.animationDuration=(Math.random()*2+2)+"s";
+        page4.appendChild(c);
+      }
+      for(let i=0;i<50;i++){
+        const h=document.createElement("div"); h.className="heart"; h.innerHTML="💗";
+        h.style.left=Math.random()*100+"%";
+        h.style.animationDuration=(Math.random()*3+3)+"s";
+        h.style.fontSize=(Math.random()*20+14)+"px"; page4.appendChild(h);
+      }
+      for(let i=0;i<40;i++){
+        const s=document.createElement("div"); s.className="sparkle"; s.innerHTML="✨";
+        s.style.left=Math.random()*100+"%";
+        s.style.animationDuration=(Math.random()*3+2)+"s";
+        s.style.fontSize=(Math.random()*14+12)+"px"; page4.appendChild(s);
+      }
+      const flash=document.createElement("div"); flash.className="flash-bg";
+      page4.appendChild(flash);
+    },4000);
+
+  },800);
 }
 </script>
 </body>
-  </html>
-  
+</html>
